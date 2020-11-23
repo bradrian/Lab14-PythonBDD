@@ -1,7 +1,7 @@
-import main.retirement_calculator as _retcalc
+from main.retirement_calculator import RetirementCalculator
 import calendar
 
-retire_calculator = _retcalc.RetirementCalculator()
+retire_calculator = RetirementCalculator()
 
 print("Social Security Full Retirement Age Calculator")
 
