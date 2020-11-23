@@ -15,33 +15,32 @@ def user_start_calculator(calculator):
     calculator = RetirementCalculator()
 
 
-@when(parsers.parse('the birth year is "{birth_year}"'))
+@when(parsers.parse('the birth year is <birth_year>'))
 def calculate_retirement_age(calculator, birth_year):
-    (year, month) = calculator.getRetirementAge(int(birth_year))
+    calculator.getRetirementAge(int(birth_year))
 
 
-@then(parsers.parse('the results will show the age of "{birth_results}"'))
-def calculate_retirement_age_results(calculator, birth_results):
-    assert 1 == 1 #birth_results == str(calculator.age_year) + "  years and " + str(calculator.age_month) + " months"
+@then(parsers.parse('the results will show the age of <age_year> years and <age_month> months'))
+def calculate_retirement_age_results(calculator, age_year, age_month):
+    assert age_year == str(calculator.age_year) and age_month == str(calculator.age_month)
 
 
 @given('the user is on the date calculator')
-def user_start_date_calcultor(calculator):
+def user_start_date_calculator(calculator):
     calculator = RetirementCalculator()
 
 
-@when(parsers.parse('the birth date is "{birth_date}"'))
-def calculate_retirement_age(calculator, birth_date):
-    input_date = birth_date.split(", ")
-    input_year = int(input_date[0])
-    input_month = int(input_date[1])
-    (age_year, age_month) = calculator.getRetirementAge(input_year)
-    (year, month) = calculator.getDateForFullBenefits(input_year, input_month)
+@when(parsers.parse('the birth date is <birth_year> and <birth_month>'))
+def calculate_retirement_age(calculator, birth_year, birth_month):
+    input_year = int(birth_year)
+    input_month = int(birth_month)
+    calculator.getRetirementAge(input_year)
+    calculator.getDateForFullBenefits(input_year, input_month)
 
 
-@then(parsers.parse('the results will show the date of "{birth_date_results}"'))
-def calculate_retirement_age_results(calculator, birth_date_results):
-    assert birth_date_results == "month " + str(calculator.retire_month) + " in the year " + str(calculator.retire_year)
+@then(parsers.parse('the results will show the date of <retire_month> in the year <retire_year>'))
+def calculate_retirement_age_results(calculator, retire_month, retire_year):
+    assert retire_month == str(calculator.retire_month) and retire_year == str(calculator.retire_year)
 
 
 

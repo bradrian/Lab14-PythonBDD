@@ -3,10 +3,32 @@ Feature:  Full Retirement Age Calculator
 
 Scenario: Calculate retirement age
 	Given the user is on the calculator
-	When the birth year is "1937"
-	Then the results will show the age of "65 years and 0 months"
+	When the birth year is <birth_year>
+	Then the results will show the age of <age_year> years and <age_month> months
+
+    Examples:
+        | birth_year | age_year | age_month |
+        |    1937    |    65    |     0     |
+        |    1938    |    65    |     2     |
+        |    1939    |    65    |     4     |
+        |    1940    |    65    |     6     |
+        |    1941    |    65    |     8     |
+        |    1942    |    65    |     10    |
+        |    1954    |    66    |     0     |
+        |    1955    |    66    |     2     |
+        |    1956    |    66    |     4     |
+        |    1957    |    66    |     6     |
+        |    1958    |    66    |     8     |
+        |    1959    |    66    |     10    |
+        |    1960    |    67    |     0     |
+
 
 Scenario: Calculate retirement date
 	Given the user is on the date calculator
-	When the birth date is "2001, 1"
-	Then the results will show the date of "month 1 in the year 2068"
+	When the birth date is <birth_year> and <birth_month>
+	Then the results will show the date of <retire_month> in the year <retire_year>
+
+    Examples:
+        | birth_year | birth_month | retire_year | retire_month |
+        |    1940    |      7      |    2006     |       1      |
+        |    2001    |      1      |    2068     |       1      |
